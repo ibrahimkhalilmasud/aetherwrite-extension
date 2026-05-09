@@ -1,0 +1,6 @@
+node_modules
+build
+.plasmo
+dist
+playwright-report
+test-results

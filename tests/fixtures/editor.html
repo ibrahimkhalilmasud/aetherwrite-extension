@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>AetherWrite Fixture</title>
+    <style>
+      body { font-family: Inter, sans-serif; margin: 20px; }
+      #editor { width: 600px; height: 120px; }
+      #suggestion { display: none; margin-top: 8px; color: #ef4444; font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <h1>Compose</h1>
+    <textarea id="editor" placeholder="Type here"></textarea>
+    <div id="suggestion">Suggestion: teh → the</div>
+
+    <script>
+      const editor = document.getElementById("editor")
+      const suggestion = document.getElementById("suggestion")
+
+      editor.addEventListener("input", () => {
+        suggestion.style.display = editor.value.includes("teh") ? "block" : "none"
+      })
+
+      editor.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          suggestion.style.display = "none"
+        }
+      })
+
+      editor.addEventListener("dblclick", () => {
+        if (!editor.value) {
+          return
+        }
+
+        const before = editor.selectionStart
+        const after = editor.selectionEnd
+        editor.setRangeText("the", before, after, "end")
+      })
+    </script>
+  </body>
+</html>
